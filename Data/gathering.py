@@ -1,14 +1,18 @@
 import pandas as pd
+import numpy as np
 
+ncov_data_cases = pd.read_html('https://www.worldometers.info/coronavirus/')
+print(type(ncov_data_cases))
+#print(ncov_data_cases)
+ncov_data_cases_arr = np.array(ncov_data_cases)
+print(ncov_data_cases_arr.shape)
 
-ncov_data_cases = pd.read_html('https://www.worldometers.info/coronavirus/', )
+#df = ncov_data_cases[0]
+#print(type(df))
 
-print(ncov_data_cases)
+#print(df[['Country','Cases']])
 
-df = pd.DataFrame(ncov_data_cases)
-print(df)
-
-df.to_csv('/Users/yigitbaser/Coronavirusmodel/dataCSV.csv', index=True)
+#df.to_csv('/Users/yigitbaser/Coronavirusmodel/dataCSV.csv', index=True)
 
 
 
