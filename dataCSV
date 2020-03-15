@@ -1,0 +1,15 @@
+,0
+0,"           Country,Other  TotalCases  ... Serious,Critical  Tot Cases/1M pop
+0                  China       80824  ...           3610.0              56.2
+1                  Italy       21157  ...           1518.0             349.9
+2                   Iran       12729  ...              NaN             151.5
+3               S. Korea        8086  ...             59.0             157.7
+4                  Spain        6391  ...            293.0             136.7
+..                   ...         ...  ...              ...               ...
+148             Suriname           1  ...              NaN               NaN
+149             Eswatini           1  ...              NaN               0.9
+150                 Togo           1  ...              NaN               0.1
+151  U.S. Virgin Islands           1  ...              NaN               NaN
+152               Total:      156432  ...           5909.0              20.1
+
+[153 rows x 9 columns]"
