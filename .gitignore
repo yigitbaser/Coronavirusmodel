@@ -1,2 +1,6 @@
+.mypy_cache/
+
+#environment
 Venv
-.mypy_cache
+
+
