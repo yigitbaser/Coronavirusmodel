@@ -1,16 +1,22 @@
+"""
+Gathers data from www.worldometers.info
+
+"""
+
 import pandas as pd
-import numpy as np
 
-ncov_data_cases = pd.read_html('https://www.worldometers.info/coronavirus/')
-print(type(ncov_data_cases))
+URL_ADD = 'https://www.worldometers.info/coronavirus'
+ncov_data_cases = pd.read_html(URL_ADD)
+
+ncov_data_df = ncov_data_cases[0]
+print(type(ncov_data_df))
 #print(ncov_data_cases)
-ncov_data_cases_arr = np.array(ncov_data_cases)
-print(ncov_data_cases_arr.shape)
 
-#df = ncov_data_cases[0]
-#print(type(df))
+print(ncov_data_df[ncov_data_df['Country,Other']== 'Iran']['TotalCases'])
 
-#print(df[['Country','Cases']])
+
+
+#df[df['job']=='unemployed']['education'].value_counts()
 
 #df.to_csv('/Users/yigitbaser/Coronavirusmodel/dataCSV.csv', index=True)
 
