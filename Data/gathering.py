@@ -11,7 +11,7 @@ URL_DEATH_TOLL = 'https://www.worldometers.info/coronavirus/coronavirus-death-to
 
 def gather_total_data() -> pd.DataFrame:
     """
-
+    Returns the table imported from worldometers.
     :return: DataFrame.
     """
     ncov_data_cases = pd.read_html(URL_GENERAL_DATA)
@@ -40,6 +40,8 @@ def gather_precondition_data() -> pd.DataFrame:
 def get_deathtoll_data():
     dt_data = pd.read_html('https://www.worldometers.info/coronavirus/coronavirus-death-toll/')
     return dt_data[0]
+
+if __name__ == '__main__':
 
 
 
