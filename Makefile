@@ -33,7 +33,7 @@ mypy_f:
 	echo "###################################################################################################";\
 	echo "";\
 	echo "";\
-	mypy --strict src/$(FILE_FOLDER)/$(FILE_NAME).py --config-file mypy.ini;\
+	mypy --strict $(FILE_FOLDER)/$(FILE_NAME).py --config-file mypy.ini;\
 	echo "";\
 	echo "";\
 	echo "# MYPY TEST FILE ###################################################################################";\
@@ -54,7 +54,7 @@ lint_f:
 	echo "###################################################################################################";\
 	echo "";\
 	echo "";\
-	pylint src/$(FILE_FOLDER)/$(FILE_NAME).py --rcfile .pylintrc;\
+	pylint $(FILE_FOLDER)/$(FILE_NAME).py --rcfile .pylintrc;\
 	echo "# LINT TEST FILE ###################################################################################";\
 		echo "   - File Name: $(FILE_NAME)";\
 	echo "   - File Folder: $(FILE_FOLDER)";\
@@ -93,7 +93,7 @@ mypy_no_clear_console:
 	echo "    - Pytest fixture Class cannot subclass 'BaseTransformator' (has type 'Any') in child classes.";\
 	echo "";\
 	echo "";\
-	mypy --strict src pipelines tests --config-file mypy.ini;\
+	mypy --strict Data pipelines tests --config-file mypy.ini;\
 
 .DEVAULT: mypy
 mypy: clear_console mypy_no_clear_console
@@ -110,7 +110,7 @@ lint_no_clear_console:
 	echo "      Because of problem in Base classes.";\
 	echo "";\
 	echo "";\
-	pylint src pipelines tests --rcfile .pylintrc;\
+	pylint Data pipelines tests --rcfile .pylintrc;\
 
 .DEFAULT: lint
 lint: clear_console lint_no_clear_console
@@ -127,7 +127,7 @@ lint_dup_no_clear_console:
 	echo "      Because of problem in Base classes.";\
 	echo "";\
 	echo "";\
-	pylint src pipelines tests --rcfile .pylintrc_dup;\
+	pylint Data pipelines tests --rcfile .pylintrc_dup;\
 
 lint_dup: clear_console lint_dup_no_clear_console
 
