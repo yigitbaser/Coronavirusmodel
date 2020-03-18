@@ -4,9 +4,6 @@
 
 There are 
 
-    1. General Data
-    2.
-
 1. General
 
     8 different data by country as follows:

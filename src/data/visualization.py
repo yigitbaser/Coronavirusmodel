@@ -1,9 +1,11 @@
 import pandas as pd
-import matplotlib.pyplot as plt
+import src.Utils.Loader
+import matplotlib as plt
 import gathering
 
 plt.close('all')
 
-
-df = gathering.gather_total_data()
-df.plot(kind='bar',x='name',y='age')
+plt.figure()
+df = pd.read_csv('/Users/yigitbaser/Coronavirusmodel/Storage/2020-03-18/TotalTable_1933.csv')
+#df.plot(x='Country,Other',y='TotalCases',kind='scatter')
+#plt.show()

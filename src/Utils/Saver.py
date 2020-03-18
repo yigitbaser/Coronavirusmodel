@@ -6,7 +6,6 @@ if __name__ == '__main__':
     time_now = Timestamp.now()
     time_date = Timestamp.date(time_now)
 
-
     #Total Data
     data_total = gt.gathering.get_total_data()
     data_total['TimeStamp'] = time_now
@@ -22,7 +21,7 @@ if __name__ == '__main__':
     data_age['TimeStamp'] = time_now
 
     TABLE_TYPE = 'DATAAGE'
-    data_total.to_csv(
+    data_age.to_csv(
         '/Users/yigitbaser/Coronavirusmodel/Storage/' + str(time_date) + '/' + TABLE_TYPE + '_' + str(
             time_now.hour) + str(
             time_now.minute) + '.csv')
@@ -33,7 +32,7 @@ if __name__ == '__main__':
     data_sex['TimeStamp'] = time_now
 
     TABLE_TYPE = 'DATASEX'
-    data_total.to_csv(
+    data_sex.to_csv(
         '/Users/yigitbaser/Coronavirusmodel/Storage/' + str(time_date) + '/' + TABLE_TYPE + '_' + str(
             time_now.hour) + str(
             time_now.minute) + '.csv')
@@ -41,10 +40,10 @@ if __name__ == '__main__':
     #Data Precondition
 
     data_precon = gt.gathering.get_precondition_data()
-    data_age['TimeStamp'] = time_now
+    data_precon['TimeStamp'] = time_now
 
     TABLE_TYPE = 'DATAPRECON'
-    data_total.to_csv(
+    data_precon.to_csv(
         '/Users/yigitbaser/Coronavirusmodel/Storage/' + str(time_date) + '/' + TABLE_TYPE + '_' + str(
             time_now.hour) + str(
             time_now.minute) + '.csv')
@@ -54,7 +53,7 @@ if __name__ == '__main__':
     data_total_death['TimeStamp'] = time_now
 
     TABLE_TYPE = 'DATATOTALDEATH'
-    data_total.to_csv(
+    data_total_death.to_csv(
         '/Users/yigitbaser/Coronavirusmodel/Storage/' + str(time_date) + '/' + TABLE_TYPE + '_' + str(
             time_now.hour) + str(
             time_now.minute) + '.csv')
@@ -65,7 +64,7 @@ if __name__ == '__main__':
     data_daily_death['TimeStamp'] = time_now
 
     TABLE_TYPE = 'DATADAILYDEATH'
-    data_total.to_csv(
+    data_daily_death.to_csv(
         '/Users/yigitbaser/Coronavirusmodel/Storage/' + str(time_date) + '/' + TABLE_TYPE + '_' + str(
             time_now.hour) + str(
             time_now.minute) + '.csv')
