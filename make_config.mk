@@ -1,2 +1,2 @@
-FILE_NAME = CoverageLogger
-FILE_FOLDER = Utils
+FILE_NAME = Processing
+FILE_FOLDER = Processing

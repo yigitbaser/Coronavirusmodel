@@ -1,2 +1,15 @@
-Venv
 .mypy_cache/
+
+#environment
+Venv
+storage
+
+config.ini
+Mypy.ini
+Pytest.ini
+make_config.mk
+
+#all good
+
+
+
