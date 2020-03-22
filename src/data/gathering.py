@@ -10,7 +10,7 @@ URL_DEATH_TOLL = 'https://www.worldometers.info/coronavirus/coronavirus-death-to
 
 class gathering:
     """
-    Includes functions to get data from website
+    Contains functions to get data from website
     """
     def get_total_data() -> pd.DataFrame:
         """

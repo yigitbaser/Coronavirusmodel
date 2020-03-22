@@ -1,8 +1,7 @@
-import  pandas as pd
+import pandas as pd
 
+class Loader():
 
-def load_data():
-    FILE_NAME = '/Users/yigitbaser/Coronavirusmodel/Storage/2020-03-18/TotalTable_1933.csv'
-
-    df = pd.read_csv(FILE_NAME)
-    return df
+    def load_data(file_path :str ):
+        df = pd.read_csv(file_path)
+        return df

@@ -4,5 +4,10 @@
 Venv
 storage
 
+config.ini
+Mypy.ini
+Pytest.ini
+make_config.mk
+
 
 

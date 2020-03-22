@@ -6,8 +6,6 @@
 
 include make_config.mk
 
-
-
 # UTILS ---------------------------------------------
 hello:
 	@echo ""
@@ -17,11 +15,6 @@ hello:
 clear_console:
 	@echo "";\
 	clear;\
-
-
-
-
-
 
 # FILE MAKES -------------------------------------
 
@@ -191,6 +184,15 @@ cronus_test:
 
 .DEFAULT: cronus
 cronus: clear_console cronus_test
+
+#FOR DATA UPDATE AND ARCHIVING
+archive:
+	@echo "Archive is being done.";\
+	python -m src/Utils/Saver.py;\
+	echo "Archive Done!"
+.DEFAULT: archive
+archive: clear_console archive
+
 
 # FOR FIXING -----------------------------------------------------------------------------------------------------------
 

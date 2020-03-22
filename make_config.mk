@@ -1,2 +1,2 @@
-FILE_NAME = gathering
-FILE_FOLDER = Data
+FILE_NAME = Processing
+FILE_FOLDER = Processing
