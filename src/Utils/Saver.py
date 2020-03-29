@@ -2,9 +2,20 @@ from pandas import Timestamp
 
 from src.Data import gathering as gt
 
+
+def save_to_db(get_fcn, data_type:str)
+    time_now = Timestamp.now()
+    time_date = Timestamp.date(time_now)
+    table_name =
+
+
+
 if __name__ == '__main__':
     time_now = Timestamp.now()
     time_date = Timestamp.date(time_now)
+
+    DATA_TO_IMPORT = {'TotalTable', 'Data_Age', 'Data_Sex', 'Data_Precondition', 'Data_TotalDeath','Data_DailyDeath'}
+
 
     #Total Data
     data_total = gt.gathering.get_total_data()
