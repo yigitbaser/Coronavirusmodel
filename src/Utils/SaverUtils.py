@@ -2,12 +2,12 @@ import pandas as pd
 from pandas import Timestamp
 
 from src.Data import gathering as gt
-
+DATA_TO_IMPORT = {'TotalTable', 'Data_Age', 'Data_Sex', 'Data_Precondition', 'Data_TotalDeath',
+                      'Data_DailyDeath'}
 
 class Saver():
-    DATA_TO_IMPORT = {'TotalTable', 'Data_Age', 'Data_Sex', 'Data_Precondition', 'Data_TotalDeath',
-                      'Data_DailyDeath'}
-    def __init__(self, data:str, data_type:str, fcn, directory):
+
+    def __init__(self, data:str = None , data_type:str = None, fcn=None, directory:str = None):
         self.DATA_ = data
         self.data_type = data_type
         self.function = fcn
@@ -24,6 +24,14 @@ class Saver():
 
     def save_to_directory(self, data: pd.DataFrame, directory):
         return data.to_csv(directory+'.csv')
+
+
+#if __name__ == '__main__':
+
+   # for data_type in DATA_TO_IMPORT:
+    #    name = str(data_type)
+     #       gt.gathering.get_total_data()
+
 
 #    def save_all(self,directory):
 #
