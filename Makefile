@@ -209,6 +209,10 @@ Vent: clear_console venvactivate
 #	. .venv/Scripts/activate; pip install -r requirements.txt
 #	. .venv/Scripts/activate
 
+
+# python -m venv venv --promt tasks_proj 
+
+
 #.DEFAULT: t
 #t:#
 #	touch .venv/Scripts/activate
