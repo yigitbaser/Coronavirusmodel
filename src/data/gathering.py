@@ -3,7 +3,8 @@ Gathers data from www.worldometers.info
 
 """
 import pandas as pd
-import urllib
+import requests
+
 
 URL_GENERAL_DATA = 'http://www.worldometers.info/coronavirus'
 URL_AGE_SEX_DATA = 'http://www.worldometers.info/coronavirus/coronavirus-age-sex-demographics/'
@@ -13,70 +14,75 @@ class gathering():
     """
     Contains functions to get data from website
     """
-    def run(self, data_type):
-        if data_type == 'TotalTable':
-            return self.get_total_data()
+    def __init__(self):
+        definition = ""
 
-    def get_total_data() -> pd.DataFrame:
+    def run(self, data_type):
+        """
+        #TODO DESIGN IT
+        Runs all functions
+        :param data_type:
+        :return:
+        """
+        if data_type == 'TotalTable':
+            return gathering.get_total_data(URL_GENERAL_DATA)
+        elif data_type == "AgeData":
+            return gathering.get_age_data(URL_AGE_SEX_DATA)
+
+    def read_avoid_403(url: str) -> pd.DataFrame:
+        header = {
+            "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.75 Safari/537.36",
+            "X-Requested-With": "XMLHttpRequest"
+        }
+        r = requests.get(url, headers=header)
+        return pd.read_html(r.text)
+
+    def get_total_data(url:str=URL_GENERAL_DATA) -> pd.DataFrame:
         """
         Returns the main table imported from worldometers.
         :return: DataFrame.
         """
-        ncov_data_cases = pd.read_html(URL_GENERAL_DATA)
-        ncov_data_df = ncov_data_cases[0]
-        return ncov_data_df
+        ncov_data_cases = gathering.read_avoid_403(url)
+        return ncov_data_cases[0]
 
-    def get_total_data_403():
-        user_agent = 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.7) Gecko/2009021910 Firefox/3.0.7'
 
-        url = URL_GENERAL_DATA
-        headers = {'User-Agent': user_agent, }
-
-        request = urllib.request.Request(url, None, headers)  # The assembled request
-        response = urllib.request.urlopen(request)
-        data = response.read()  # The data u need
-        return data
-
-    def get_age_data() -> pd.DataFrame:
+    def get_age_data(url:str=URL_AGE_SEX_DATA) -> pd.DataFrame:
         """
         Returns death rate by age distribution
         :return: DataFrame. Age/DeathRate(ConfirmedCases)/DeathRate(AllCases)
         """
-        ncov_data_age = pd.read_html(URL_AGE_SEX_DATA)
-        ncov_data_age_df = ncov_data_age[0]
-        return ncov_data_age_df
+        ncov_data_age = gathering.read_avoid_403(url)
+        return ncov_data_age[0]
 
-    def get_sex_data() -> pd.DataFrame:
+    def get_sex_data(url:str = URL_AGE_SEX_DATA) -> pd.DataFrame:
         """
         Returns death rate by sex(male/female)
         :return: DataFrame. Sex/DeathRate(ConfirmedCases)/DeathRate(AllCases)
         """
-        ncov_data_sex = pd.read_html(URL_AGE_SEX_DATA)
-        ncov_data_sex_df = ncov_data_sex[1]
-        return ncov_data_sex_df
+        ncov_data_sex = gathering.read_avoid_403(url)
+        return ncov_data_sex[1]
 
-    def get_precondition_data() -> pd.DataFrame:
+    def get_precondition_data(url:str=URL_AGE_SEX_DATA) -> pd.DataFrame:
         """
         Returns death rate by precondition(male/female)
         :return: DataFrame. PreexistingCondition/DeathRate(ConfirmedCases)/DeathRate(AllCases)
         """
 
-        ncov_data_precon = pd.read_html(URL_AGE_SEX_DATA)
-        ncov_data_precon_df = ncov_data_precon[2]
-        return ncov_data_precon_df
+        ncov_data_precon = pd.read_html(url)
+        return ncov_data_precon[2]
 
-    def get_total_deaths_data() -> pd.DataFrame:
+    def get_total_deaths_data(url:str= URL_DEATH_TOLL) -> pd.DataFrame:
         """
         Returns total death and daily change per day
         :return: DataFrame. Date/TotalDeath/ChangeInTotal/ChangeInTotal%
         """
-        td_data = pd.read_html(URL_DEATH_TOLL)
+        td_data = pd.read_html(url)
         return td_data[0]
 
-    def get_daily_deaths_data() -> pd.DataFrame:
+    def get_daily_deaths_data(url:str=URL_DEATH_TOLL) -> pd.DataFrame:
         """
         Returns daily death and change of it compared to day before
         :return: DataFrame. Date/DailyDeath/ChangeInDaily/ChangeInDaily%
         """
-        td_data = pd.read_html(URL_DEATH_TOLL)
+        td_data = pd.read_html(url)
         return td_data[1]
