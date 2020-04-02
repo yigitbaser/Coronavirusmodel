@@ -1,3 +1,6 @@
+#THINGS TO FIX:
+-Setup.py: To setup virtual environment by makefile
+
 # NCOV-19 STATISTICS AND MODELLING 
 This code includes functions and data to make 
 mathematical model of NCOV-19. 
