@@ -8,13 +8,7 @@ include make_config.mk
 
 # UTILS ---------------------------------------------
 hello:
-	@echo ""
-	@echo "First make command!"
-
-.DEFAULT: clear_console
-clear_console:
-	@echo "";\
-	clear;\
+	@echo "Hello World!!"
 
 # FILE MAKES -------------------------------------
 
@@ -24,20 +18,12 @@ mypy_f:
 	echo "   - File Name: $(FILE_NAME)";\
 	echo "   - File Folder: $(FILE_FOLDER)";\
 	echo "###################################################################################################";\
-	echo "";\
-	echo "";\
 	mypy --strict $(FILE_FOLDER)/$(FILE_NAME).py --config-file mypy.ini;\
-	echo "";\
-	echo "";\
 	echo "# MYPY TEST FILE ###################################################################################";\
 	echo "   - File Name: $(FILE_NAME)";\
 	echo "   - File Folder: $(FILE_FOLDER)";\
 	echo "###################################################################################################";\
-	echo "";\
-	echo "";\
 	mypy --strict tests/t_$(FILE_FOLDER)/test_$(FILE_NAME).py --config-file mypy.ini;\
-	echo "";\
-	echo "";\
 
 .DEFAULT: lint_f
 lint_f:
@@ -45,18 +31,12 @@ lint_f:
 	echo "   - File Name: $(FILE_NAME)";\
 	echo "   - File Folder: $(FILE_FOLDER)";\
 	echo "###################################################################################################";\
-	echo "";\
-	echo "";\
 	pylint $(FILE_FOLDER)/$(FILE_NAME).py --rcfile .pylintrc;\
 	echo "# LINT TEST FILE ###################################################################################";\
 		echo "   - File Name: $(FILE_NAME)";\
 	echo "   - File Folder: $(FILE_FOLDER)";\
 	echo "###################################################################################################";\
-	echo "";\
-	echo "";\
 	pylint tests/t_$(FILE_FOLDER)/test_$(FILE_NAME).py --rcfile .pylintrc;\
-	echo "";\
-	echo "";\
 
 .DEFAULT: test_f
 test_f:
@@ -64,8 +44,6 @@ test_f:
 	echo "   - File Name: $(FILE_NAME)";\
 	echo "   - File Folder: $(FILE_FOLDER)";\
 	echo "###################################################################################################";\
-	echo "";\
-	echo "";\
 	python -m pytest tests/t_$(FILE_FOLDER)/test_$(FILE_NAME).py;\
 	python -m pytest tests/t_$(FILE_FOLDER)/test_$(FILE_NAME).txt;\
 
@@ -80,12 +58,6 @@ mypy_no_clear_console:
 	@echo "###################################################################################################";\
 	echo "# TYPE CHECKING IN SRC PIPELINE AND TESTS FOLDER ##################################################";\
 	echo "###################################################################################################";\
-	echo "";\
-	echo "Excluded from checking, for more information see documentation *.md file.";\
-	echo "    - Untyped decorator makes function 'test_density' untyped : in test_* files.";\
-	echo "    - Pytest fixture Class cannot subclass 'BaseTransformator' (has type 'Any') in child classes.";\
-	echo "";\
-	echo "";\
 	mypy --strict Data pipelines tests --config-file mypy.ini;\
 
 .DEVAULT: mypy
@@ -94,35 +66,18 @@ mypy: clear_console mypy_no_clear_console
 lint_no_clear_console:
 	@echo "###################################################################################################";\
 	echo "# LINTING ALL FILES IN SRC PIPELINE AND TESTS FOLDER ##############################################";\
-	echo "###################################################################################################";\
-	echo "";\
-	echo "Excluded from checking, for more information see documentation *.md file.";\
-	echo "    - Module and file names starting with t_, test_, tests name.";\
-	echo "    - Duplicate code - for that is the separate make.";\
-	echo "    - Parameters differ from overridden methods fit, fit_predict, predict.";\
-	echo "      Because of problem in Base classes.";\
-	echo "";\
-	echo "";\
 	pylint Data pipelines tests --rcfile .pylintrc;\
 
 .DEFAULT: lint
-lint: clear_console lint_no_clear_console
+lint: lint_no_clear_console
 
 lint_dup_no_clear_console:
 	@echo "###################################################################################################";\
 	echo "# LINTING ALL FILES IN SRC PIPELINE AND TESTS FOLDER, CHECK DUPLICITIES ###########################";\
 	echo "###################################################################################################";\
-	echo "";\
-	echo "Excluded from checking, for more information see documentation *.md file.";\
-	echo "    - Module and file names starting with t_, test_, tests name.";\
-	echo "    - Duplicate code - for that is the separate make.";\
-	echo "    - Parameters differ from overridden methods fit, fit_predict, predict.";\
-	echo "      Because of problem in Base classes.";\
-	echo "";\
-	echo "";\
-	pylint Data pipelines tests --rcfile .pylintrc_dup;\
+	pylint src test Data pipelines tests --rcfile .pylintrc_dup;\
 
-lint_dup: clear_console lint_dup_no_clear_console
+lint_dup: lint_dup_no_clear_console
 
 test_no_clear_console:
 	@echo "###################################################################################################";\
@@ -133,9 +88,9 @@ test_no_clear_console:
 	python -m pytest --ignore=tests/t_Utils/test_Cronus.py;\
 
 .DEFAULT: test
-test: clear_console test_no_clear_console
+test: test_no_clear_console
 
-# SAMPLE CODE FOR TEST COVERAGE -----------------------------------------------------------------------------------
+#  TEST COVERAGE -----------------------------------------------------------------------------------
 
 cover:
 	@echo "##################################################################################################";\
@@ -147,7 +102,7 @@ cover:
 	pytest --cov-report html:coverage --cov-branch --cov=tests
 
 .DEFAULT: coverage
-coverage: clear_console cover
+coverage: cover
 
 log_coverage:
 	@echo "###################################################################################################";\
@@ -161,9 +116,9 @@ endif
 	@echo "# TOTAL COVERAGE RATIO IS BACKLOGGED INTO coverage_log.csv FILE####################################"
 
 .DEFAULT: log_cov
-log_cov: clear_console log_coverage
+log_cov: log_coverage
 
-all: clear_console mypy_no_clear_console lint_no_clear_console test_no_clear_console
+all: mypy_no_clear_console lint_no_clear_console test_no_clear_console
 
 # FOR BENCHMARKING -----------------------------------------------------------------------------------------------------
 
@@ -183,31 +138,43 @@ cronus_test:
 	python -m pytest tests/t_Utils/test_Cronus.py;\
 
 .DEFAULT: cronus
-cronus: clear_console cronus_test
+cronus: cronus_test
 
 #FOR DATA UPDATE AND ARCHIVING
+#FIX HERE##########################
 archive:
 	@echo "Archive is being done.";\
 	python -m src/Utils/Saver.py;\
 	echo "Archive Done!"
 .DEFAULT: archive
-archive: clear_console archive
+#FIX HERE##########################
 
 
 # FOR FIXING -----------------------------------------------------------------------------------------------------------
 
+#activate virtual environment
+act_venv:
+	@echo "Archive is being done.";\
+	source venv/bin/activate
+	echo "Archive Done!"
+.DEFAULT: act_venv
 
-venvactivate:
-	@echo"######open vena";\
-	source venv/bin/activate;\
 
-.DEFAULT: venv
-Vent: clear_console venvactivate
+
+#Create virtual environment
+make_venv:
+	@echo "Virtual environment is being created.";\
+	python -m venv venv2 --prompt setup.py;\
+	echo "Done";\
 
 #venv/bin/activate: requirements.txt
 #	test -d .venv || virtualenv .venv
 #	. .venv/Scripts/activate; pip install -r requirements.txt
 #	. .venv/Scripts/activate
+
+
+# python -m venv venv --promt tasks_proj 
+
 
 #.DEFAULT: t
 #t:#
