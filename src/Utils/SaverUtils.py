@@ -1,4 +1,4 @@
-#TODO Rename it to Saver
+# TODO Rename it to Saver
 import pandas as pd
 from pandas import Timestamp
 import os.path
@@ -6,11 +6,10 @@ from src.Data import gathering as gt
 
 
 class Saver():
+    DATA_TO_IMPORT = {'TotalTable', 'DataAge', 'DataSex', 'DataPrecon', 'DataTotalDeaths',
+                      'DataDailyDeaths'}
 
-    DATA_TO_IMPORT = {'TotalTable', 'Data_Age', 'Data_Sex', 'Data_Precondition', 'Data_TotalDeath',
-                      'Data_DailyDeath'}
-
-    def __init__(self, data:str = None , data_type:str = None, fcn=None, directory:str = None):
+    def __init__(self, data: str = None, data_type: str = None, fcn=None, directory: str = None):
         self.data_ = data
         self.data_type = data_type
         self.fcn = fcn
@@ -31,14 +30,13 @@ class Saver():
 
         return data_input
 
-    def save_to_directory(data: pd.DataFrame , directory:str = None):
+    def check_directory(directory: str):
         if os.path.exists(directory):
-            return data.to_csv(directory)
+            pass
         else:
-            os.mknod(directory)
-            return data.to_csv(directory)
+            os.mkdir(directory)
 
+    def save_to_directory(data_to_save: pd.DataFrame, directory: str):
+            return data_to_save.to_csv(directory)
 
-    #def
-
-
+    # def

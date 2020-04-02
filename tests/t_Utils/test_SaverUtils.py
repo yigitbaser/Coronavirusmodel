@@ -37,7 +37,7 @@ def test_save_to_directory(saved_files):
         os.remove(saved_files)
 
     data_to_save = Loader.load_data(file_path=TABLE_PATH)
-    Saver.save_to_directory(data=data_to_save,directory=saved_files)
+    Saver.save_to_directory(data_to_save=data_to_save, directory=saved_files)
     assert path.exists(saved_files) == True
 
 

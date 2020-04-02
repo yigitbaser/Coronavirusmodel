@@ -17,17 +17,26 @@ class gathering():
     def __init__(self):
         definition = ""
 
-    def run(self, data_type):
+    def run(data_type:str) -> pd.DataFrame:
         """
         #TODO DESIGN IT
-        Runs all functions
+        Runs  functions
         :param data_type:
         :return:
         """
-        if data_type == 'TotalTable':
-            return gathering.get_total_data(URL_GENERAL_DATA)
-        elif data_type == "AgeData":
-            return gathering.get_age_data(URL_AGE_SEX_DATA)
+        if data_type == "TotalTable":
+            return gathering.get_total_data()
+        elif data_type == "DataAge":
+            return gathering.get_age_data()
+        elif data_type == "DataSex":
+            return gathering.get_sex_data()
+        elif data_type == "DataPrecon":
+            return gathering.get_precondition_data()
+        elif data_type == "DataTotalDeaths":
+            return gathering.get_total_deaths_data()
+        elif data_type == "DataDailyDeaths":
+            return gathering.get_daily_deaths_data()
+
 
     def read_avoid_403(url: str) -> pd.DataFrame:
         header = {
@@ -68,7 +77,7 @@ class gathering():
         :return: DataFrame. PreexistingCondition/DeathRate(ConfirmedCases)/DeathRate(AllCases)
         """
 
-        ncov_data_precon = pd.read_html(url)
+        ncov_data_precon = gathering.read_avoid_403(url)
         return ncov_data_precon[2]
 
     def get_total_deaths_data(url:str= URL_DEATH_TOLL) -> pd.DataFrame:
@@ -76,7 +85,7 @@ class gathering():
         Returns total death and daily change per day
         :return: DataFrame. Date/TotalDeath/ChangeInTotal/ChangeInTotal%
         """
-        td_data = pd.read_html(url)
+        td_data = gathering.read_avoid_403(url)
         return td_data[0]
 
     def get_daily_deaths_data(url:str=URL_DEATH_TOLL) -> pd.DataFrame:
@@ -84,5 +93,5 @@ class gathering():
         Returns daily death and change of it compared to day before
         :return: DataFrame. Date/DailyDeath/ChangeInDaily/ChangeInDaily%
         """
-        td_data = pd.read_html(url)
+        td_data = gathering.read_avoid_403(url)
         return td_data[1]
