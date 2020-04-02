@@ -1,8 +1,7 @@
-# TODO Rename it to Saver
+import os.path
+
 import pandas as pd
 from pandas import Timestamp
-import os.path
-from src.Data import gathering as gt
 
 
 class Saver():
@@ -37,6 +36,6 @@ class Saver():
             os.mkdir(directory)
 
     def save_to_directory(data_to_save: pd.DataFrame, directory: str):
-            return data_to_save.to_csv(directory)
+        return data_to_save.to_csv(directory)
 
     # def

@@ -75,7 +75,7 @@ lint_dup_no_clear_console:
 	@echo "###################################################################################################";\
 	echo "# LINTING ALL FILES IN SRC PIPELINE AND TESTS FOLDER, CHECK DUPLICITIES ###########################";\
 	echo "###################################################################################################";\
-	pylint Data pipelines tests --rcfile .pylintrc_dup;\
+	pylint src test Data pipelines tests --rcfile .pylintrc_dup;\
 
 lint_dup: lint_dup_no_clear_console
 

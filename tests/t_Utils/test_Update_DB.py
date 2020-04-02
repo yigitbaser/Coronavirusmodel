@@ -1,5 +1,5 @@
 import os.path
-
+#TODO FIX ALL FILE
 from src.Data.gathering import gathering
 from src.Utils.SaverUtils import Saver
 
@@ -15,13 +15,13 @@ directory = "/Users/yigitbaser/Coronavirusmodel/Storage/TestData/TempData/TotalT
 TEST_FILE_2 = "/Users/yigitbaser/Coronavirusmodel/Storage/TestData/TempData/TotalTable_1932.csv"
 def test_TotalData():
 
-    total_data = gathering.get_total_data()
+    total_data = get_total_data()
     total = Saver.add_Timestamp(total_data)
     Saver.save_to_directory(data_to_save=total, directory=directory)
 
     assert os.path.exists(directory) == True
 def test_AgeData():
-    age_data = gathering.get_total_data()
+    age_data = get_total_data()
     total = Saver.add_Timestamp(age_data)
     Saver.save_to_directory(data_to_save=total, directory=directory)
 
