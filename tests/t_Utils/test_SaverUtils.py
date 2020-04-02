@@ -1,10 +1,15 @@
 from src.Utils.SaverUtils import Saver
 from src.Utils.Loader import Loader
 
+import os.path
+import pytest
 import pandas as pd
 
+from os import path
+TABLE_PATH = "/Users/yigitbaser/Coronavirusmodel/Storage/TestData/TotalTable_77.csv"
 
-TABLE_PATH = "/Users/yigitbaser/Coronavirusmodel/Storage/2020-03-22/TotalTable_77.csv"
+TEST_FILE_1 = "/Users/yigitbaser/Coronavirusmodel/Storage/TestData/TempData/TotalTable_1933.csv"
+TEST_FILE_2 = "/Users/yigitbaser/Coronavirusmodel/Storage/TestData/TempData/TotalTable_1932.csv"
 
 def test_add_Timestamp():
     """
@@ -18,12 +23,24 @@ def test_add_Timestamp():
     #Check if column 'Timestamp' contains df.Timestamp objects
     assert added['Timestamp'].dtype.str[1] == 'M'
 
-
-def test_save_to_directory():
+#@pytest.mark.parametrize('input_files',[ TEST_FILE_1,
+    #                               TEST_FILE_2
+#], ids=repr)
+@pytest.mark.parametrize('saved_files',[ TEST_FILE_1,
+                                   TEST_FILE_2
+], ids=repr)
+def test_save_to_directory(saved_files):
     """
 
     """
-    pass
+    if os.path.exists(saved_files):
+        os.remove(saved_files)
+
+    data_to_save = Loader.load_data(file_path=TABLE_PATH)
+    Saver.save_to_directory(data=data_to_save,directory=saved_files)
+    assert path.exists(saved_files) == True
+
+
 
 
 

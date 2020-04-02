@@ -1,42 +1,44 @@
+#TODO Rename it to Saver
 import pandas as pd
 from pandas import Timestamp
-
+import os.path
 from src.Data import gathering as gt
-DATA_TO_IMPORT = {'TotalTable', 'Data_Age', 'Data_Sex', 'Data_Precondition', 'Data_TotalDeath',
-                      'Data_DailyDeath'}
+
 
 class Saver():
 
+    DATA_TO_IMPORT = {'TotalTable', 'Data_Age', 'Data_Sex', 'Data_Precondition', 'Data_TotalDeath',
+                      'Data_DailyDeath'}
+
     def __init__(self, data:str = None , data_type:str = None, fcn=None, directory:str = None):
-        self.DATA_ = data
+        self.data_ = data
         self.data_type = data_type
-        self.function = fcn
+        self.fcn = fcn
         self.directory = directory
 
-    def add_Timestamp(data_input: pd.DataFrame) -> pd.DataFrame:
+    def add_Timestamp(data_input: pd.DataFrame, timestamp_input: pd.Timestamp = None) -> pd.DataFrame:
         """
+        #TODO add docstring to param timestamp
+        #TODO If timestamp input has timestamp return EXCEPTION ALREADY TIMESTAMP EXCEPTION
         This functions adds Tİmestamp as a column to DataFrame input
         :param data_input: DataFrame. Input data
         :return: DataFrame. Timestamped dataframe
         """
-        data_input['Timestamp'] = Timestamp.now()
+        if timestamp_input == None:
+            data_input['Timestamp'] = Timestamp.now()
+        else:
+            data_input['Timestamp'] = timestamp_input
+
         return data_input
 
-    def save_to_directory(self, data: pd.DataFrame, directory):
-        return data.to_csv(directory+'.csv')
+    def save_to_directory(data: pd.DataFrame , directory:str = None):
+        if os.path.exists(directory):
+            return data.to_csv(directory)
+        else:
+            os.mknod(directory)
+            return data.to_csv(directory)
 
 
-#if __name__ == '__main__':
+    #def
 
-   # for data_type in DATA_TO_IMPORT:
-    #    name = str(data_type)
-     #       gt.gathering.get_total_data()
-
-
-#    def save_all(self,directory):
-#
- #       for table in self.DATA_TO_IMPORT:
- #           if table = 'TotalTable':
-  #              data_table= gt.gathering.get_total_data()
-  #              save_to_directory(data_table)
 
