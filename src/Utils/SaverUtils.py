@@ -35,7 +35,7 @@ class Saver():
         else:
             os.mkdir(directory)
 
-    def save_to_directory(data_to_save: pd.DataFrame, directory: str):
-        return data_to_save.to_csv(directory)
+    def save_to_directory(data_to_save: pd.DataFrame, directory: str,header_inp: bool=False):
+        return data_to_save.to_csv(path_or_buf=directory,header=header_inp)
 
     # def
