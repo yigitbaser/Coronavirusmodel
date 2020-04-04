@@ -1,4 +1,4 @@
-#IBEWARE OF TAB SPACING WHILE WRITING IN PYCHARM(4 SPACES)
+#BEWARE OF TAB SPACING WHILE WRITING IN PYCHARM(4 SPACES)
 
 .PHONY: help messages ahoj mypy lint test venv test t lint_f mypy_f all_f clear_console
 
@@ -58,7 +58,7 @@ mypy_no_clear_console:
 	@echo "###################################################################################################";\
 	echo "# TYPE CHECKING IN SRC PIPELINE AND TESTS FOLDER ##################################################";\
 	echo "###################################################################################################";\
-	mypy --strict Data pipelines tests --config-file mypy.ini;\
+	mypy --strict src/Utils tests --config-file mypy.ini;\
 
 .DEVAULT: mypy
 mypy: clear_console mypy_no_clear_console
@@ -66,7 +66,7 @@ mypy: clear_console mypy_no_clear_console
 lint_no_clear_console:
 	@echo "###################################################################################################";\
 	echo "# LINTING ALL FILES IN SRC PIPELINE AND TESTS FOLDER ##############################################";\
-	pylint Data pipelines tests --rcfile .pylintrc;\
+	pylint src --rcfile .pylintrc;\
 
 .DEFAULT: lint
 lint: lint_no_clear_console

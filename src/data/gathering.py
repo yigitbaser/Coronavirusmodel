@@ -4,7 +4,8 @@ Gathers data from www.worldometers.info
 """
 import pandas as pd
 import requests
-from src.Exceptions import  DataImportException
+
+from src.Exceptions import data_import_exception
 
 URL_GENERAL_DATA = 'http://www.worldometers.info/coronavirus'
 URL_AGE_SEX_DATA = 'http://www.worldometers.info/coronavirus/coronavirus-age-sex-demographics/'
@@ -18,8 +19,7 @@ class Gathering():
 
     def __init__(self, data_type: str):
         """
-
-        :type data_type: str.Type of data to use mainly in run(). For example, 'TotalTable' 
+        :type data_type: str.Type of data to use mainly in run(). For example, 'TotalTable'
         """
         self.data_type = data_type
 
@@ -31,7 +31,7 @@ class Gathering():
         :param data_type:
         :return:
         """
-        #TODO Fix here
+        # TODO Fix here
         if data_type == "TotalTable":
             return Gathering.get_total_data()
         elif data_type == "DataAge":
@@ -44,9 +44,9 @@ class Gathering():
             return Gathering.get_total_deaths_data()
         elif data_type == "DataDailyDeaths":
             return Gathering.get_daily_deaths_data()
-        #TODO Exception
-        #else:
-        #    raise DataImportException()
+        # TODO Exception
+        else:
+            raise data_import_exception.DataImportException()
 
     @classmethod
     def read_avoid_403(cls, url: str) -> pd.DataFrame:
@@ -57,7 +57,7 @@ class Gathering():
         :param url: str. url
         :return: Dataframe. Data on the url
         """
-        #Open it like a browser
+        # Open it like a browser
         header = {
             "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
                           "(KHTML, like Gecko) Chrome/50.0.2661.75 Safari/537.36",
